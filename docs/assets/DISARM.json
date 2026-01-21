@@ -19734,8 +19734,8 @@
             "id": "x-mitre-matrix--0e0c1597-4b7d-43f1-b768-1c4a253c44df",
             "created": "2026-01-20T21:49:08.665523Z",
             "modified": "2026-01-20T21:49:08.665523Z",
-            "name": "DISARM V2 Observations Framework",
-            "description": "The DISARM V2 Observations Framework standardizes the descriptions of observations made by analysts which pertain to suspected adversary operations or campaigns.",
+            "name": "DISARM V1.7",
+            "description": "The DISARM V1.7 includes new techniques relevant to fact checking.",
             "tactic_refs": [
                 "x-mitre-tactic--b03163eb-7e81-4fed-9819-641bf7c99507",
                 "x-mitre-tactic--431af018-56ae-406c-9648-4857f074fffc",

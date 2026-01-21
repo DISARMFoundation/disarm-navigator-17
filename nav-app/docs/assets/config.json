@@ -5,7 +5,7 @@
             "version": "1",
             "domains": [
                 {   
-                    "name": "DISARM V2 Observable",
+                    "name": "DISARM V1.7",
                     "identifier": "DISARM",
                     "data": ["assets/DISARM.json"]
                 }
