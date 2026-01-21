@@ -15,13 +15,19 @@ fixed_count = 0
 for obj in data['objects']:
     # Check if this is a sub-technique (attack-pattern with x_mitre_is_subtechnique = true)
     if obj.get('type') == 'attack-pattern' and obj.get('x_mitre_is_subtechnique') == True:
-        # If it has kill_chain_phases, remove it
-        if 'kill_chain_phases' in obj:
-            del obj['kill_chain_phases']
+        # If it has kill_chain_phases with content, set it to empty array
+        if 'kill_chain_phases' in obj and len(obj['kill_chain_phases']) > 0:
+            obj['kill_chain_phases'] = []
             fixed_count += 1
             # Get the technique ID for reporting
             tech_id = obj.get('external_references', [{}])[0].get('external_id', 'unknown')
-            print(f"Removed kill_chain_phases from sub-technique: {tech_id}")
+            print(f"Set kill_chain_phases to [] for sub-technique: {tech_id}")
+        # If it doesn't have kill_chain_phases at all, add an empty array
+        elif 'kill_chain_phases' not in obj:
+            obj['kill_chain_phases'] = []
+            fixed_count += 1
+            tech_id = obj.get('external_references', [{}])[0].get('external_id', 'unknown')
+            print(f"Added empty kill_chain_phases for sub-technique: {tech_id}")
 
 # Write the fixed data back
 with open('nav-app/src/assets/DISARM.json', 'w', encoding='utf-8') as f:
