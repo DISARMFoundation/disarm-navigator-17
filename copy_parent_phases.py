@@ -1,5 +1,6 @@
 import json
 import os
+from copy import deepcopy
 
 os.chdir(r'C:\Users\steph\OneDrive\Documents\GitHub\disarm-navigator-17')
 
@@ -25,13 +26,15 @@ for tech_id, obj in all_techniques.items():
             parent_id = tech_id.split('.')[0]
             parent = all_techniques.get(parent_id)
             if parent and 'kill_chain_phases' in parent:
-                # Copy parent's kill_chain_phases to sub-technique
-                obj['kill_chain_phases'] = parent['kill_chain_phases'].copy()
+                # Deep copy parent's kill_chain_phases to sub-technique
+                obj['kill_chain_phases'] = deepcopy(parent['kill_chain_phases'])
                 fixed_count += 1
-                print(f"Copied kill_chain_phases from {parent_id} to {tech_id}")
+                if fixed_count <= 10:  # Only print first 10
+                    print(f"Copied kill_chain_phases from {parent_id} to {tech_id}")
 
-# Write back
+# Write back with proper formatting
 with open('nav-app/src/assets/DISARM.json', 'w', encoding='utf-8') as f:
     json.dump(data, f, indent=4, ensure_ascii=False)
 
 print(f"\nCopied kill_chain_phases to {fixed_count} sub-techniques")
+print("JSON file written successfully")
